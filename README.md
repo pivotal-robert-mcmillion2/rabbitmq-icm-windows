@@ -1,4 +1,4 @@
-# rabbitmq-icm
+# rabbitmq-windows-icm
 RabbitMQ - Install Configure Manage
 
 Introduction
