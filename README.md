@@ -29,7 +29,7 @@ _Note: You need to be in the `rabbitmq-icm` directory to run all `vagrant` comma
 1. Download the required Vagrant box and update to latest:
     ```
     vagrant box add mwrock/Windows2016
-    vagrant box update --box ubuntu/xenial64
+    vagrant box update --box mwrock/Windows2016
     ```
 1. Verify VirtualBox networks:
     - Open VirtualBox.
