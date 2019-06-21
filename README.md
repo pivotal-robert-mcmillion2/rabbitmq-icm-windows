@@ -4,17 +4,13 @@ RabbitMQ - Install Configure Manage
 Introduction
 -
 
-This `Vagrantfile` and `provision.sh` will create:
+This `Vagrantfile` and `provision.ps1` will create:
 - 3 x RabbitMQ nodes:
     - Specified RabbitMQ software installed.
     - Configured as a single cluster.
-- 2 x client nodes:
-    - Pika (Python RabbitMQ client) installed.
-    - Used to run producer/consumer scripts.
 
 Eralng and RabbitMQ packages are automatically installed from here:
-- https://packages.erlang-solutions.com
-- https://packagecloud.io/rabbitmq/rabbitmq-server
+    - https://chocolatey.org/packages/rabbitmq
 
 Steps
 -
@@ -26,13 +22,13 @@ _Note: You need to be in the `rabbitmq-icm` directory to run all `vagrant` comma
 1. Clone this repo:
     ```
     cd ~/workspace
-    git clone https://github.com/stephendotcarter/rabbitmq-icm
-    cd rabbitmq-icm
+    git clone https://github.com/pivotal-robert-mcmillion2/rabbitmq-icm-windows.git
+    cd rabbitmq-icm-windows
     ```
     
 1. Download the required Vagrant box and update to latest:
     ```
-    vagrant box add ubuntu/xenial64
+    vagrant box add mwrock/Windows2016
     vagrant box update --box ubuntu/xenial64
     ```
 1. Verify VirtualBox networks:
@@ -44,11 +40,13 @@ _Note: You need to be in the `rabbitmq-icm` directory to run all `vagrant` comma
         - or:
             - Change VM IPs in `Vagrantfile` to match the same subnet as `vboxnet0`.
             - Change the `hosts` file to reflect the new VM IPs
-1. Modify the variables in `provision.sh` as needed:
+1. Modify the variables in `provision.ps1` as needed:
     ```
     // Should match exact version number from PackageCloud RabbitMQ repo
     RABBITMQ_VERSION=3.7.7-1
-
+    ```
+    Will update this part later...some tweeking needs to be done to the script ^
+    ```
     // Username and password for admin user
     RABBITMQ_USERNAME=admin
     RABBITMQ_PASSWORD=changeme
@@ -74,18 +72,8 @@ _Note: You need to be in the `rabbitmq-icm` directory to run all `vagrant` comma
     ```
 1. Verify the RabbitMQ cluster is running using the Management Plugin web interface:
     - http://192.168.56.11:15672
-    - Log in using the username/password set in `provision.sh`
-1. Run the producer script to send some messages a queue:
-    ```
-    vagrant ssh client1
-    bash /vagrant/sample_producer.sh
-    ```
-1. Run the consumer script to consumer the messages from the queue:
-    ```
-    vagrant ssh client1
-    bash /vagrant/sample_consumer.sh
-    ```
-1. Modify the variables in `sample_producer.sh` and `sample_consumer.sh` as needed. 
+    - Log in using the username/password set in `provision.ps1`
+
 1. Destroy the VMs:
     ```
     vagrant destroy -f
